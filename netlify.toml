@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# SPA 경로 처리를 위한 리다이렉트(404 → index.html)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
