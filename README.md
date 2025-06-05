@@ -65,9 +65,12 @@ python -m http.server 8000
     - SPA인 사이트: https://comfy-pegasus-cb3734.netlify.app/dashboard
   - (경로 없는 사이트를 SPA가 다 잡는게 맞나 싶긴 하네, 이따 수정할 듯?)
 
-### 6. 404, 오류 페이지도 따로 만들기
+### 6. `[...catchall]` 제거
 
-가능한지는 모르겠음.
+그냥 전역 에러 사이트 만들고, JS 없는 환경에서는 빈 404 반환하게 됨.   
+일반적인 사용자는 JS가 있어야 하고, 크롤러는 404 응답 값 정도는 확인할 태니까 상관 없지 않을까?
+
+이게 더 나아보이긴 함.
 
 ## 구현 핵심 설명
 
@@ -77,6 +80,7 @@ python -m http.server 8000
    - `export const prerender = true;`, `export const ssr = true;`
    - `ssr = true`가 없으면 SSG가 안됨.
      - 서버가 없는데도 ssr을 활성화해야 하는 이유는 SSG가 서버에서 뿌려주는거라 `ssr = false`로 하면 모순된다고 생각하던가, 아님 뭐 버그던가...
+       - 아님 정적 파일 서버나 동적 서버에서든 정적으로 보내주는 서버 단 전송이니까 ssr이라고 보던가?
      - 일단 없으면 안되니까 넣으면 됨
 3. SPA가 필요한 경우 `+page.svelte`나 `+layout.svelte`에
    - `export const ssr = false;`, `export const prerender = false;`
