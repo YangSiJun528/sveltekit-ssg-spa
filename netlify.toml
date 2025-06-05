@@ -4,6 +4,8 @@
 
 # SPA 경로 처리를 위한 리다이렉트(404 → index.html)
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# from = "/*"
+# to = "/index.html"
+# status = 200
+# 필요 없음 JS 활성화 안하면 404 뜨고 빈 화면이고,
+# 아니면 만들어둔 전역 에러 페이지로 보내게 함.
