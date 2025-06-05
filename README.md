@@ -35,7 +35,7 @@ python -m http.server 8000
 
 사이트가서 배포하면 됨. 루트에 설정 파일 만들어둠.
 
-지금은 https://comfy-pegasus-cb3734.netlify.app/ 를 사용
+지금은 https://6841421a9a05f584d8866865--comfy-pegasus-cb3734.netlify.app/ 를 사용
 
 ### 4. SSG 동작 안하는 문제 해결하기
 
@@ -59,10 +59,10 @@ python -m http.server 8000
     - 서버에서 미리 생성된 정적 HTML 파일을 직접 로드
     - JavaScript 없이도 완전한 콘텐츠가 표시됨
     - 이것이 바로 SSG가 제대로 작동하는 증거입니다
-  - https://comfy-pegasus-cb3734.netlify.app/about 으로 바로 이동하거나 새 탭으로 열 때 SSG처럼 정적 필드된 파일이 그대로 반환됨.
+  - https://6841421a9a05f584d8866865--comfy-pegasus-cb3734.netlify.app/about 으로 바로 이동하거나 새 탭으로 열 때 SSG처럼 정적 필드된 파일이 그대로 반환됨.
   - 개발자 도구에서 JS 끄고 일반적으로 이동해도 잘 됨.
     - 근데 SPA나 없는 사이트(이것도 SPA가 다 잡고 있어서)로 이동하면 SPA라서 빈 화면만 뜸.
-    - SPA인 사이트: https://comfy-pegasus-cb3734.netlify.app/dashboard
+    - SPA인 사이트: https://6841421a9a05f584d8866865--comfy-pegasus-cb3734.netlify.app/dashboard
   - (경로 없는 사이트를 SPA가 다 잡는게 맞나 싶긴 하네, 이따 수정할 듯?)
 
 ### 6. `[...catchall]` 제거
