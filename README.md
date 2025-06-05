@@ -72,6 +72,9 @@ python -m http.server 8000
 
 이게 더 나아보이긴 함.
 
+근데 netlify 동작 특성인지 모든 요청이 잡히는게 없으면 root로 보내는거 같음.  
+preview에선 잘 돌고 GPT가 s3에선 설정 없어도 잘 된다니까 냅둠. 
+
 ## 구현 핵심 설명
 
 1. svelte.config.js에서 `@sveltejs/adapter-static`을 로드해서 `adapter` 갈아 끼우기
