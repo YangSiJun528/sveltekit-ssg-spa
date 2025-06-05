@@ -35,11 +35,54 @@ python -m http.server 8000
 
 사이트가서 배포하면 됨. 루트에 설정 파일 만들어둠.
 
+지금은 https://comfy-pegasus-cb3734.netlify.app/ 를 사용
+
 ### 4. SSG 동작 안하는 문제 해결하기
 
 > fallback 옵션을 index.html로 설정하면, 빌드 시 생성된 정적 HTML 파일이 아닌 index.html을 모든 경로에 대해 반환하게 됩니다. 이로 인해 SSG로 생성된 페이지도 SPA처럼 동작하게 됩니다.
 
 라는데, 그래서 수정해줘야 할 듯?
+
+### 5. 여차저차 해서 잘 도는거 확인
+
+안된다고 착각했던게, hydration 때문이였던거 같음
+
+- 일반 클릭 (SPA 모드):
+  - 설명
+    - 브라우저에서 JavaScript가 활성화된 상태
+    - SvelteKit의 클라이언트 사이드 라우팅이 동작
+    - 페이지 전환 시 부드러운 전환 효과와 빠른 로딩
+  - 이미 사이트가 열려있고 JS 활성화 되어있는 상태에서 다른 사이트로 이동 시 발생
+
+- Cmd+클릭 또는 새 탭 (SSG 모드):
+  - 설명
+    - 서버에서 미리 생성된 정적 HTML 파일을 직접 로드
+    - JavaScript 없이도 완전한 콘텐츠가 표시됨
+    - 이것이 바로 SSG가 제대로 작동하는 증거입니다
+  - https://comfy-pegasus-cb3734.netlify.app/about 으로 바로 이동하거나 새 탭으로 열 때 SSG처럼 정적 필드된 파일이 그대로 반환됨.
+  - 개발자 도구에서 JS 끄고 일반적으로 이동해도 잘 됨.
+    - 근데 SPA나 없는 사이트(이것도 SPA가 다 잡고 있어서)로 이동하면 SPA라서 빈 화면만 뜸.
+    - SPA인 사이트: https://comfy-pegasus-cb3734.netlify.app/dashboard
+  - (경로 없는 사이트를 SPA가 다 잡는게 맞나 싶긴 하네, 이따 수정할 듯?)
+
+### 6. 404, 오류 페이지도 따로 만들기
+
+가능한지는 모르겠음.
+
+## 구현 핵심 설명
+
+1. svelte.config.js에서 `@sveltejs/adapter-static`을 로드해서 `adapter` 갈아 끼우기
+   - 나머지 설정은 현재 구현 보고 참고하기
+2. SSG가 필요한 경우 `+page.svelte`나 `+layout.svelte`에
+   - `export const prerender = true;`, `export const ssr = true;`
+   - `ssr = true`가 없으면 SSG가 안됨.
+     - 서버가 없는데도 ssr을 활성화해야 하는 이유는 SSG가 서버에서 뿌려주는거라 `ssr = false`로 하면 모순된다고 생각하던가, 아님 뭐 버그던가...
+     - 일단 없으면 안되니까 넣으면 됨
+3. SPA가 필요한 경우 `+page.svelte`나 `+layout.svelte`에
+   - `export const ssr = false;`, `export const prerender = false;`
+   - 사용하기
+   - 이건 CSR이려면 ssr이랑 prerender 옵션이 꺼져있어야 하는게 맞음.
+
 
 # GPT 설명
 ## 요약
