@@ -21,7 +21,7 @@ const config = {
 			// SSG로만 배포하면 true로 해서 엄격하게 검사하는게 맞는데,
 			// SPA로도 배포하는거라 매핑 안되는 페이지(fallback으로 구현된 SPA 페이지들)가 있어서 무조건 실패함
 			// 그래서 false로 설정해줘야 함.
-			strict: false
+			strict: true
 		})
 	}
 };
